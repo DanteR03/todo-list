@@ -11,4 +11,4 @@ defaultProject.AddTask(task1);
 defaultProject.AddTask(task2);
 defaultProject.AddTask(task3);
 
-console.log(defaultProject.title);
+console.log(defaultProject.tasks[0].status);

@@ -4,5 +4,15 @@ export default class Task {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.status = "not completed";
     }
-};
+
+    changeStatus() {
+        if (this.status === "not completed") {
+            this.status = "completed";
+        }
+        else {
+            this.status = "not completed";
+        }
+    }
+}
