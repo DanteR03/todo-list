@@ -7,12 +7,16 @@ export default class Task {
         this.status = "not completed";
     }
 
-    changeStatus() {
+    changeTaskStatus() {
         if (this.status === "not completed") {
             this.status = "completed";
         }
         else {
             this.status = "not completed";
         }
+    }
+
+    getTaskInfo(key) {
+        return this[key];
     }
 }
