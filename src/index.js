@@ -1,5 +1,6 @@
 import Task from "./task.js";
 import Project from "./projects.js";
+import { projects, addProject, activeProject, setActiveProject } from "./projectController.js";
 
 let defaultProject = new Project("Default");
 
@@ -11,3 +12,20 @@ defaultProject.addTask(task1);
 defaultProject.addTask(task2);
 defaultProject.addTask(task3);
 
+let secondDefaultProject = new Project("Default2");
+
+let task4 = new Task("exampleOne", "exampleDescOne", "01.01.1111", "highest priority");
+let task5 = new Task("exampleTwo", "exampleDescTwo", "10.01.1111", "medium priority");
+let task6 = new Task("exampleThree", "exampleDescThree", "01.05.1111", "low priority");
+
+secondDefaultProject.addTask(task4);
+secondDefaultProject.addTask(task5);
+secondDefaultProject.addTask(task6);
+
+addProject(defaultProject);
+addProject(secondDefaultProject);
+
+console.log(projects);
+console.log(activeProject);
+setActiveProject("Default3");
+console.log(activeProject);
