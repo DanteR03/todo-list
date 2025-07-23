@@ -1,6 +1,8 @@
 import Task from "./task.js";
 import Project from "./projects.js";
+import "./styles.css";
 import { projects, addProject, activeProject, setActiveProject } from "./projectController.js";
+import { displayProjects } from "./DOMController.js";
 
 let defaultProject = new Project("Default");
 
@@ -11,4 +13,5 @@ let task3 = new Task("exampleThree", "exampleDescThree", "01.05.1111", "low prio
 defaultProject.addTask(task1);
 defaultProject.addTask(task2);
 defaultProject.addTask(task3);
+
 

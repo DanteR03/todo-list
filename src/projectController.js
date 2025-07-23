@@ -1,16 +1,14 @@
-let projects = [];
-let activeProject = "";
+export let projects = [];
+export let activeProject = "";
 
-function addProject(project) {
+export function addProject(project) {
     projects.push(project);
 }
 
-function setActiveProject(projectTitle) {
+export function setActiveProject(projectTitle) {
     projects.forEach((project) => {
         if (project.title === projectTitle) {
             activeProject = project;
         }
     })
 }
-
-export { projects, activeProject, addProject, setActiveProject }
