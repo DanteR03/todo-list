@@ -7,7 +7,7 @@ export function displayProjects() {
     let projectItems = projects;
     projectItems.forEach((project) => {
         let itemContainer = document.createElement("div");
-        itemContainer.id = "project-item";
+        itemContainer.classList.add("project-item");
         let titlePara = document.createElement("p");
         titlePara.textContent = project.title;
         let switchButton = document.createElement("button");
@@ -24,7 +24,7 @@ export function displayTasks() {
     let tasks = activeProject.tasks;
     tasks.forEach((task) => {
         let taskContainer = document.createElement("div");
-        taskContainer.id = "todo-item";
+        taskContainer.classList.add("todo-item");
         let titlePara = document.createElement("p");
         titlePara.textContent = task.title;
         let descriptionPara = document.createElement("p");
@@ -43,3 +43,7 @@ export function displayTasks() {
         tasksContainer.append(taskContainer);
     })
 }
+
+let taskButton = document.querySelector("#add-task-button");
+let newTaskModal = document.querySelector("#task-form-modal");
+taskButton.addEventListener("click", () => newTaskModal.showModal());

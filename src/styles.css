@@ -20,8 +20,10 @@ body {
 header {
     grid-area: header;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 8px;
 }
 
 #sidebar {
@@ -43,7 +45,7 @@ header {
     gap: 8px;
 }
 
-#project-item {
+.project-item {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -62,8 +64,20 @@ header {
     gap: 8px;
 }
 
-#todo-item {
+.todo-item {
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+#task-form-modal {
+    align-self: center;
+    justify-self: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
 }

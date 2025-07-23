@@ -8,6 +8,7 @@
     <body>
         <header>
             <h1>To Do List</h1>
+            <button id="add-task-button">Add new task</button>
         </header>
         <div id="sidebar">
             <div id="projects-container">
@@ -22,5 +23,33 @@
                 </div>
             </div>
         </div>
+        <dialog id="task-form-modal">
+            <form method="dialog">
+            <label for="title">
+                Title:
+                <input type="text" name="title" id="title" required />
+            </label>
+            <label for="description">
+                Description:
+                <input type="text" name="description" id="description"/>
+            </label>
+            <label for="dueDate">
+                Due Date:
+                <input type="date"/>
+            </label>
+            <label for="priority">
+                Priority:
+                <select name="priority" id="priority">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </label>
+        <div class="form-buttons">
+            <button class="form-close-button">Close</button>
+            <button class="form-submit-button">Submit</button>
+        </div>
+        </form>
+        </dialog>
     </body>
 </html>
