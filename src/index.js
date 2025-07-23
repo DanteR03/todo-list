@@ -2,7 +2,7 @@ import Task from "./task.js";
 import Project from "./projects.js";
 import "./styles.css";
 import { projects, addProject, activeProject, setActiveProject } from "./projectController.js";
-import { displayProjects } from "./DOMController.js";
+import { displayProjects, displayTasks } from "./DOMController.js";
 
 let defaultProject = new Project("Default");
 
@@ -14,4 +14,9 @@ defaultProject.addTask(task1);
 defaultProject.addTask(task2);
 defaultProject.addTask(task3);
 
+addProject(defaultProject);
+setActiveProject("Default");
+console.log(activeProject);
 
+displayProjects();
+displayTasks();

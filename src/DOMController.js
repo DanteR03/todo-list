@@ -9,12 +9,37 @@ export function displayProjects() {
         let itemContainer = document.createElement("div");
         itemContainer.id = "project-item";
         let titlePara = document.createElement("p");
-        titlePara = project.title;
+        titlePara.textContent = project.title;
         let switchButton = document.createElement("button");
         switchButton.textContent = "Switch";
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
         itemContainer.append(titlePara, switchButton, deleteButton);
         projectContainer.append(itemContainer);
+    })
+}
+
+export function displayTasks() {
+    let tasksContainer = document.querySelector("#todo-items-container");
+    let tasks = activeProject.tasks;
+    tasks.forEach((task) => {
+        let taskContainer = document.createElement("div");
+        taskContainer.id = "todo-item";
+        let titlePara = document.createElement("p");
+        titlePara.textContent = task.title;
+        let descriptionPara = document.createElement("p");
+        descriptionPara.textContent = task.description;
+        let dueDatePara = document.createElement("p");
+        dueDatePara.textContent = task.dueDate;
+        let priorityPara = document.createElement("p");
+        priorityPara.textContent = task.priority;
+        let statusPara = document.createElement("p");
+        statusPara.textContenr = task.status;
+        let editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        taskContainer.append(titlePara, descriptionPara, dueDatePara, priorityPara, statusPara, editButton, deleteButton);
+        tasksContainer.append(taskContainer);
     })
 }
