@@ -31,7 +31,7 @@
             </label>
             <label for="description">
                 Description:
-                <input type="text" name="description" id="description"/>
+                <textarea name="description" id="description" rows="8" maxlength="150"></textarea>
             </label>
             <label for="dueDate">
                 Due Date:
@@ -44,6 +44,18 @@
                     <option value="medium">Medium</option>
                     <option value="low">Low</option>
                 </select>
+            </label>
+        <div class="form-buttons">
+            <button class="form-close-button">Close</button>
+            <button class="form-submit-button">Submit</button>
+        </div>
+        </form>
+        </dialog>
+        <dialog id="project-form-modal">
+            <form method="dialog">
+            <label for="title">
+                Title:
+                <input type="text" name="title" id="title" required />
             </label>
         <div class="form-buttons">
             <button class="form-close-button">Close</button>

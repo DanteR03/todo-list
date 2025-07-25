@@ -75,6 +75,11 @@ header {
     justify-self: center;
 }
 
+#project-form-modal {
+    align-self: center;
+    justify-self: center;
+}
+
 form {
     display: flex;
     flex-direction: column;

@@ -46,4 +46,7 @@ export function displayTasks() {
 
 let taskButton = document.querySelector("#add-task-button");
 let newTaskModal = document.querySelector("#task-form-modal");
+let projectButton = document.querySelector("#add-project-button");
+let newProjectModal = document.querySelector("#project-form-modal");
 taskButton.addEventListener("click", () => newTaskModal.showModal());
+projectButton.addEventListener("click", () => newProjectModal.showModal());
