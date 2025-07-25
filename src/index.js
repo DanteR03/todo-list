@@ -7,8 +7,11 @@ import { displayProjects, displayTasks } from "./DOMController.js";
 let defaultProject = new Project("Default");
 
 let task1 = new Task("exampleOne", "exampleDescOne", "01.01.1111", "highest priority");
+Task.incrementIdCounter();
 let task2 = new Task("exampleTwo", "exampleDescTwo", "10.01.1111", "medium priority");
+Task.incrementIdCounter();
 let task3 = new Task("exampleThree", "exampleDescThree", "01.05.1111", "low priority");
+Task.incrementIdCounter();
 
 defaultProject.addTask(task1);
 defaultProject.addTask(task2);
