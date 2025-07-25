@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>To Do List</title>
-    </head>
-    <body>
-        <header>
-            <h1>To Do List</h1>
-            <button id="add-task-button">Add new task</button>
-        </header>
-        <div id="sidebar">
-            <div id="projects-container">
-                <h2>Projects</h2>
-                <div id="project-items-container">
-                </div>
-                <button id="add-project-button">Add Project</button>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+</head>
+
+<body>
+    <header>
+        <h1>To Do List</h1>
+        <button id="add-task-button">Add new task</button>
+    </header>
+    <div id="sidebar">
+        <div id="projects-container">
+            <h2>Projects</h2>
+            <div id="project-items-container">
             </div>
+            <button id="add-project-button">Add Project</button>
         </div>
-        <div id="main-content">
-            <div id="todo-items-container">
-                </div>
-            </div>
+    </div>
+    <div id="main-content">
+        <div id="todo-items-container">
         </div>
-        <dialog id="task-form-modal">
-            <form method="dialog">
+    </div>
+    </div>
+    <dialog id="task-form-modal">
+        <form method="dialog">
             <label for="title">
                 Title:
                 <input type="text" name="title" id="title" required />
@@ -35,7 +37,7 @@
             </label>
             <label for="dueDate">
                 Due Date:
-                <input type="date" name="dueDate" id="dueDate" value="1111-01-01"/>
+                <input type="date" name="dueDate" id="dueDate" value="1111-01-01" />
             </label>
             <label for="priority">
                 Priority:
@@ -45,23 +47,24 @@
                     <option value="low">Low</option>
                 </select>
             </label>
-        <div class="form-buttons">
-            <button class="form-close-button">Close</button>
-            <button class="form-submit-button">Submit</button>
-        </div>
+            <div class="form-buttons">
+                <button class="form-close-button">Close</button>
+                <button class="form-submit-button">Submit</button>
+            </div>
         </form>
-        </dialog>
-        <dialog id="project-form-modal">
-            <form method="dialog">
+    </dialog>
+    <dialog id="project-form-modal">
+        <form method="dialog">
             <label for="title">
                 Title:
                 <input type="text" name="title" id="title" required />
             </label>
-        <div class="form-buttons">
-            <button class="form-close-button">Close</button>
-            <button class="form-submit-button">Submit</button>
-        </div>
+            <div class="form-buttons">
+                <button class="form-close-button">Close</button>
+                <button class="form-submit-button">Submit</button>
+            </div>
         </form>
-        </dialog>
-    </body>
+    </dialog>
+</body>
+
 </html>
