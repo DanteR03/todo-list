@@ -5,6 +5,7 @@ import { format } from "date-fns";
 
 export function displayProjects() {
     let projectContainer = document.querySelector("#project-items-container");
+    projectContainer.innerHTML = "";
     let projectItems = projects;
     projectItems.forEach((project) => {
         let itemContainer = document.createElement("div");
@@ -57,6 +58,7 @@ function taskSubmitButton(e) {
         taskFormTitle.reportValidity();
     } else {
         activeProject.addTask(new Task(taskFormTitle.value, taskFormDescription.value, taskFormDueDateFormatted, taskFormPriority.value));
+        Task.incrementIdCounter();
         displayTasks();
         taskFormTitle.value = "";
         taskFormDescription.value = "";
@@ -71,6 +73,24 @@ function taskCloseButton(e) {
     newTaskModal.close();
 }
 
+function projectSubmitButton(e) {
+    e.preventDefault();
+    let projectFormTitle = document.querySelector("#project-form-modal #title");
+    if (projectFormTitle.checkValidity() === false) {
+        projectFormTitle.reportValidity();
+    } else {
+        addProject(new Project(projectFormTitle.value));
+        displayProjects();
+        projectFormTitle.value = "";
+        newProjectModal.close();
+    };
+}
+
+function projectCloseButton(e) {
+    e.preventDefault();
+    newProjectModal.close();
+}
+
 
 
 let taskButton = document.querySelector("#add-task-button");
@@ -79,7 +99,11 @@ let projectButton = document.querySelector("#add-project-button");
 let newProjectModal = document.querySelector("#project-form-modal");
 taskButton.addEventListener("click", () => newTaskModal.showModal());
 projectButton.addEventListener("click", () => newProjectModal.showModal());
-let taskSubmitButtons = document.querySelector("#task-form-modal form .form-buttons .form-submit-button")
-let taskCloseButtons = document.querySelector("#task-form-modal form .form-buttons .form-close-button")
+let taskSubmitButtons = document.querySelector("#task-form-modal .form-submit-button");
+let taskCloseButtons = document.querySelector("#task-form-modal .form-close-button");
 taskSubmitButtons.addEventListener("click", (e) => taskSubmitButton(e));
 taskCloseButtons.addEventListener("click", (e) => taskCloseButton(e));
+let projectSubmitButtons = document.querySelector("#project-form-modal .form-submit-button");
+let projectCloseButtons = document.querySelector("#project-form-modal .form-close-button");
+projectSubmitButtons.addEventListener("click", (e) => projectSubmitButton(e));
+projectCloseButtons.addEventListener("click", (e) => projectCloseButton(e));
