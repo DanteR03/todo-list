@@ -4,17 +4,23 @@ import { projects, addProject, activeProject, setActiveProject, deleteProject } 
 import { format } from "date-fns";
 
 function projectSwitchButton(e) {
-    let clickedId = +e.target.parentElement.id;
-    setActiveProject(clickedId);
+    let clickedProjectId = +e.target.parentElement.id;
+    setActiveProject(clickedProjectId);
     displayTasks();
     console.log(projects);
 }
 
 function projectDeleteButton(e) {
-    let clickedId = +e.target.parentElement.id;
-    deleteProject("id", clickedId);
+    let clickedProjectId = +e.target.parentElement.id;
+    deleteProject("id", clickedProjectId);
     console.log(projects);
     displayProjects();
+}
+
+function taskDeleteButton(e) {
+    let clickedTaskId = +e.target.parentElement.id;
+    activeProject.deleteTask("id", clickedTaskId);
+    displayTasks();
 }
 
 export function displayProjects() {
@@ -60,6 +66,7 @@ export function displayTasks() {
             let editButton = document.createElement("button");
             editButton.textContent = "Edit";
             let deleteButton = document.createElement("button");
+            deleteButton.addEventListener("click", (e) => taskDeleteButton(e));
             deleteButton.textContent = "Delete";
             taskContainer.append(titlePara, descriptionPara, dueDatePara, priorityPara, statusPara, editButton, deleteButton);
             tasksContainer.append(taskContainer);
