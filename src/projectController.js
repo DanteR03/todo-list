@@ -26,7 +26,10 @@ function findProject(key, value) {
 export function deleteProject(key, value) {
     let deletedProject = findProject(key, value);
     let deletedProjectIndex = projects.indexOf(deletedProject);
-    if (deletedProjectIndex !== -1) {
+    if (deletedProjectIndex > 0 && activeProject === deletedProject) {
+        projects.splice(deletedProjectIndex, 1);
+        setActiveProject(projects[deletedProjectIndex - 1].id);
+    } else if (deletedProjectIndex > 0) {
         projects.splice(deletedProjectIndex, 1);
     }
 }

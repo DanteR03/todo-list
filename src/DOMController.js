@@ -7,14 +7,13 @@ function projectSwitchButton(e) {
     let clickedProjectId = +e.target.parentElement.id;
     setActiveProject(clickedProjectId);
     displayTasks();
-    console.log(projects);
 }
 
 function projectDeleteButton(e) {
     let clickedProjectId = +e.target.parentElement.id;
     deleteProject("id", clickedProjectId);
-    console.log(projects);
     displayProjects();
+    displayTasks();
 }
 
 function taskDeleteButton(e) {
