@@ -3,6 +3,11 @@ import Project from "./projects.js";
 import { projects, addProject, activeProject, setActiveProject, deleteProject } from "./projectController.js";
 import { format } from "date-fns";
 
+let editTaskModal = document.querySelector("#edit-task-form-modal");
+let newTaskModal = document.querySelector("#task-form-modal");
+let newProjectModal = document.querySelector("#project-form-modal");
+
+
 function projectSwitchButton(e) {
     let clickedProjectId = +e.target.parentElement.id;
     setActiveProject(clickedProjectId);
@@ -44,7 +49,7 @@ function taskDetailsButton(e) {
     editTaskForm.showModal();
 }
 
-export function displayProjects() {
+function displayProjects() {
     let projectContainer = document.querySelector("#project-items-container");
     projectContainer.innerHTML = "";
     let projectItems = projects;
@@ -65,7 +70,7 @@ export function displayProjects() {
     })
 }
 
-export function displayTasks() {
+function displayTasks() {
     let tasksContainer = document.querySelector("#todo-items-container");
     tasksContainer.innerHTML = "";
     let tasks = activeProject.tasks;
@@ -84,7 +89,6 @@ export function displayTasks() {
             let priorityPara = document.createElement("p");
             priorityPara.textContent = task.priority;
             let statusPara = document.createElement("p");
-            console.log(task.completed);
             if (task.completed === false) {
                 statusPara.textContent = "not completed"
             } else {
@@ -131,7 +135,6 @@ function editTaskSubmitButton(e) {
     e.preventDefault();
     let editTaskForm = document.querySelector("#edit-task-form-modal");
     let editedTask = activeProject.findTask("id", +editTaskForm.dataset.taskId);
-    console.log(editedTask);
     let taskFormTitle = document.querySelector("#edit-task-form-modal #title");
     let taskFormDescription = document.querySelector("#edit-task-form-modal #description");
     let taskFormDueDate = document.querySelector("#edit-task-form-modal #dueDate");
@@ -179,24 +182,28 @@ function projectCloseButton(e) {
     newProjectModal.close();
 }
 
-
-
-let taskButton = document.querySelector("#add-task-button");
-let newTaskModal = document.querySelector("#task-form-modal");
-let editTaskModal = document.querySelector("#edit-task-form-modal");
-let projectButton = document.querySelector("#add-project-button");
-let newProjectModal = document.querySelector("#project-form-modal");
-taskButton.addEventListener("click", () => newTaskModal.showModal());
-projectButton.addEventListener("click", () => newProjectModal.showModal());
-let taskSubmitButtons = document.querySelector("#task-form-modal .form-submit-button");
-let taskCloseButtons = document.querySelector("#task-form-modal .form-close-button");
-taskSubmitButtons.addEventListener("click", (e) => taskSubmitButton(e));
-taskCloseButtons.addEventListener("click", (e) => taskCloseButton(e));
-let projectSubmitButtons = document.querySelector("#project-form-modal .form-submit-button");
-let projectCloseButtons = document.querySelector("#project-form-modal .form-close-button");
-projectSubmitButtons.addEventListener("click", (e) => projectSubmitButton(e));
-projectCloseButtons.addEventListener("click", (e) => projectCloseButton(e));
-let editTaskSubmitButtons = document.querySelector("#edit-task-form-modal .form-submit-button");
-let editTaskCloseButtons = document.querySelector("#edit-task-form-modal .form-close-button");
-editTaskCloseButtons.addEventListener("click", (e) => editTaskCloseButton(e));
-editTaskSubmitButtons.addEventListener("click", (e) => editTaskSubmitButton(e));
+export function initializeDOM() {
+    let taskButton = document.querySelector("#add-task-button");
+    let projectButton = document.querySelector("#add-project-button");
+    let taskSubmitButtons = document.querySelector("#task-form-modal .form-submit-button");
+    let taskCloseButtons = document.querySelector("#task-form-modal .form-close-button");
+    let projectSubmitButtons = document.querySelector("#project-form-modal .form-submit-button");
+    let projectCloseButtons = document.querySelector("#project-form-modal .form-close-button");
+    let editTaskSubmitButtons = document.querySelector("#edit-task-form-modal .form-submit-button");
+    let editTaskCloseButtons = document.querySelector("#edit-task-form-modal .form-close-button");
+    taskButton.addEventListener("click", () => newTaskModal.showModal());
+    projectButton.addEventListener("click", () => newProjectModal.showModal());
+    taskSubmitButtons.addEventListener("click", (e) => taskSubmitButton(e));
+    taskCloseButtons.addEventListener("click", (e) => taskCloseButton(e));
+    projectSubmitButtons.addEventListener("click", (e) => projectSubmitButton(e));
+    projectCloseButtons.addEventListener("click", (e) => projectCloseButton(e));
+    editTaskCloseButtons.addEventListener("click", (e) => editTaskCloseButton(e));
+    editTaskSubmitButtons.addEventListener("click", (e) => editTaskSubmitButton(e));
+    addProject(new Project("Default"));
+    Project.incrementIdCounter();
+    setActiveProject(0);
+    activeProject.addTask(new Task("Default", "Default", format(new Date(), "yyyy-MM-dd"), "medium"));
+    Task.incrementIdCounter();
+    displayProjects();
+    displayTasks();
+}
