@@ -22,6 +22,28 @@ function taskDeleteButton(e) {
     displayTasks();
 }
 
+function taskDetailsButton(e) {
+    let clickedTaskId = +e.target.parentElement.id;
+    let clickedTask = activeProject.findTask("id", clickedTaskId);
+    let editTaskForm = document.querySelector("#edit-task-form-modal");
+    editTaskForm.dataset.taskId = clickedTaskId;
+    let taskFormTitle = document.querySelector("#edit-task-form-modal #title");
+    taskFormTitle.value = clickedTask.title;
+    let taskFormDescription = document.querySelector("#edit-task-form-modal #description");
+    taskFormDescription.value = clickedTask.description;
+    let taskFormDueDate = document.querySelector("#edit-task-form-modal #dueDate");
+    taskFormDueDate.value = clickedTask.dueDate;
+    let taskFormPriority = document.querySelector("#edit-task-form-modal #priority");
+    taskFormPriority.value = clickedTask.priority;
+    let taskFormStatus = document.querySelector("#edit-task-form-modal #status");
+    if (clickedTask.completed === false) {
+        taskFormStatus.checked = false
+    } else {
+        taskFormStatus.checked = true
+    }
+    editTaskForm.showModal();
+}
+
 export function displayProjects() {
     let projectContainer = document.querySelector("#project-items-container");
     projectContainer.innerHTML = "";
@@ -57,13 +79,20 @@ export function displayTasks() {
             let descriptionPara = document.createElement("p");
             descriptionPara.textContent = task.description;
             let dueDatePara = document.createElement("p");
-            dueDatePara.textContent = task.dueDate;
+            let dueDateFormatted = format(task.dueDate, "yyyy-MM-dd");
+            dueDatePara.textContent = dueDateFormatted;
             let priorityPara = document.createElement("p");
             priorityPara.textContent = task.priority;
             let statusPara = document.createElement("p");
-            statusPara.textContent = task.status;
+            console.log(task.completed);
+            if (task.completed === false) {
+                statusPara.textContent = "not completed"
+            } else {
+                statusPara.textContent = "completed"
+            }
             let editButton = document.createElement("button");
-            editButton.textContent = "Edit";
+            editButton.addEventListener("click", (e) => taskDetailsButton(e));
+            editButton.textContent = "Details";
             let deleteButton = document.createElement("button");
             deleteButton.addEventListener("click", (e) => taskDeleteButton(e));
             deleteButton.textContent = "Delete";
@@ -78,17 +107,16 @@ function taskSubmitButton(e) {
     let taskFormTitle = document.querySelector("#task-form-modal #title");
     let taskFormDescription = document.querySelector("#task-form-modal #description");
     let taskFormDueDate = document.querySelector("#task-form-modal #dueDate");
-    let taskFormDueDateFormatted = format(new Date(taskFormDueDate.value), "dd-MM-yyyy");
     let taskFormPriority = document.querySelector("#task-form-modal #priority");
     if (taskFormTitle.checkValidity() === false) {
         taskFormTitle.reportValidity();
     } else {
-        activeProject.addTask(new Task(taskFormTitle.value, taskFormDescription.value, taskFormDueDateFormatted, taskFormPriority.value));
+        activeProject.addTask(new Task(taskFormTitle.value, taskFormDescription.value, taskFormDueDate.value, taskFormPriority.value));
         Task.incrementIdCounter();
         displayTasks();
         taskFormTitle.value = "";
         taskFormDescription.value = "";
-        taskFormDueDate.value = "1111-01-01";
+        taskFormDueDate.value = format(new Date(), "yyyy-MM-dd");
         taskFormPriority.value = "high";
         newTaskModal.close();
     };
@@ -97,6 +125,39 @@ function taskSubmitButton(e) {
 function taskCloseButton(e) {
     e.preventDefault();
     newTaskModal.close();
+}
+
+function editTaskSubmitButton(e) {
+    e.preventDefault();
+    let editTaskForm = document.querySelector("#edit-task-form-modal");
+    let editedTask = activeProject.findTask("id", +editTaskForm.dataset.taskId);
+    console.log(editedTask);
+    let taskFormTitle = document.querySelector("#edit-task-form-modal #title");
+    let taskFormDescription = document.querySelector("#edit-task-form-modal #description");
+    let taskFormDueDate = document.querySelector("#edit-task-form-modal #dueDate");
+    let taskFormPriority = document.querySelector("#edit-task-form-modal #priority");
+    let taskFormStatus = document.querySelector("#edit-task-form-modal #status");
+    if (taskFormTitle.checkValidity() === false) {
+        taskFormTitle.reportValidity();
+    } else {
+        editedTask.changeTaskInfo("title", taskFormTitle.value);
+        editedTask.changeTaskInfo("description", taskFormDescription.value);
+        editedTask.changeTaskInfo("dueDate", taskFormDueDate.value);
+        editedTask.changeTaskInfo("priority", taskFormPriority.value);
+        if (taskFormStatus.checked) {
+            editedTask.changeTaskInfo("completed", true)
+        } else {
+            editedTask.changeTaskInfo("completed", false)
+        }
+        editTaskForm.dataset.taskId = "";
+        displayTasks();
+        editTaskForm.close();
+    }
+}
+
+function editTaskCloseButton(e) {
+    e.preventDefault();
+    editTaskModal.close();
 }
 
 function projectSubmitButton(e) {
@@ -122,6 +183,7 @@ function projectCloseButton(e) {
 
 let taskButton = document.querySelector("#add-task-button");
 let newTaskModal = document.querySelector("#task-form-modal");
+let editTaskModal = document.querySelector("#edit-task-form-modal");
 let projectButton = document.querySelector("#add-project-button");
 let newProjectModal = document.querySelector("#project-form-modal");
 taskButton.addEventListener("click", () => newTaskModal.showModal());
@@ -134,3 +196,7 @@ let projectSubmitButtons = document.querySelector("#project-form-modal .form-sub
 let projectCloseButtons = document.querySelector("#project-form-modal .form-close-button");
 projectSubmitButtons.addEventListener("click", (e) => projectSubmitButton(e));
 projectCloseButtons.addEventListener("click", (e) => projectCloseButton(e));
+let editTaskSubmitButtons = document.querySelector("#edit-task-form-modal .form-submit-button");
+let editTaskCloseButtons = document.querySelector("#edit-task-form-modal .form-close-button");
+editTaskCloseButtons.addEventListener("click", (e) => editTaskCloseButton(e));
+editTaskSubmitButtons.addEventListener("click", (e) => editTaskSubmitButton(e));

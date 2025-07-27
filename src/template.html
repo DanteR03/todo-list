@@ -37,7 +37,7 @@
             </label>
             <label for="dueDate">
                 Due Date:
-                <input type="date" name="dueDate" id="dueDate" value="1111-01-01" />
+                <input type="date" name="dueDate" id="dueDate" />
             </label>
             <label for="priority">
                 Priority:
@@ -46,6 +46,38 @@
                     <option value="medium">Medium</option>
                     <option value="low">Low</option>
                 </select>
+            </label>
+            <div class="form-buttons">
+                <button class="form-close-button">Close</button>
+                <button class="form-submit-button">Submit</button>
+            </div>
+        </form>
+    </dialog>
+    <dialog id="edit-task-form-modal">
+        <form method="dialog">
+            <label for="title">
+                Title:
+                <input type="text" name="title" id="title" required />
+            </label>
+            <label for="description">
+                Description:
+                <textarea name="description" id="description" rows="8" maxlength="150"></textarea>
+            </label>
+            <label for="dueDate">
+                Due Date:
+                <input type="date" name="dueDate" id="dueDate" />
+            </label>
+            <label for="priority">
+                Priority:
+                <select name="priority" id="priority">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </label>
+            <label for="status">
+                Completed:
+                <input type="checkbox" name="status" id="status">
             </label>
             <div class="form-buttons">
                 <button class="form-close-button">Close</button>

@@ -70,12 +70,9 @@ header {
     gap: 8px;
 }
 
-#task-form-modal {
-    align-self: center;
-    justify-self: center;
-}
-
-#project-form-modal {
+#task-form-modal,
+#edit-task-form-modal,
+#project-form-modal   {
     align-self: center;
     justify-self: center;
 }

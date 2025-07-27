@@ -6,7 +6,7 @@ export default class Task {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.status = "not completed";
+        this.completed = false;
         this.id = Task.#idCounter;
     }
 
@@ -14,13 +14,8 @@ export default class Task {
         Task.#idCounter++
     }
 
-    changeTaskStatus() {
-        if (this.status === "not completed") {
-            this.status = "completed";
-        }
-        else {
-            this.status = "not completed";
-        }
+    changeTaskInfo(key, value) {
+        this[key] = value;
     }
 
     getTaskInfo(key) {
